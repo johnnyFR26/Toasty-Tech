@@ -499,7 +499,7 @@ function LandingPageContent() {
                   {[
                     { number: "15+", label: t("about.stats.projects") },
                     { number: "100%", label: t("about.stats.clients") },
-                    { number: "8", label: t("about.stats.developers") },
+                    { number: "9", label: t("about.stats.developers") },
                     { number: "2", label: t("about.stats.experience") },
                   ].map((stat, index) => (
                     <motion.div
