@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 **Mensagem:** ${message}`;
 
   try {
-    await fetch(process.env.DISCORD_WEBHOOK_URL!, {
+    await fetch("https://discord.com/api/webhooks/1399932791101325363/qwpOE7Ymidj9neL9K8_Ld2rcfMQ788XxsMKzw-IjzCPO4X4ST5Xt96bXpwhhmCSgRtik", {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
