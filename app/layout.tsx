@@ -6,7 +6,9 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Toasty Tech',
   description: 'Crie sua inovação conosco!',
-    generator: 'v0.dev'
+  icons: {
+    icon: '/logo2.jpg',
+  }
 }
 
 export default function RootLayout({
