@@ -80,8 +80,17 @@ function LandingPageContent() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    try {
+      const response = await fetch('/api/send-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    } catch (error) {
+      console.error("Error submitting form:", error)
+    }
     console.log("Form submitted:", formData)
     setFormData({ name: "", email: "", company: "", message: "" })
     alert(t("contact.form.success"))
