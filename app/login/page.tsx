@@ -127,12 +127,6 @@ export default function LoginPage() {
               )}
             </Button>
           </form>
-
-          <div className="mt-6 p-4 bg-muted rounded-lg">
-            <p className="text-sm text-muted-foreground mb-2">Credenciais de teste:</p>
-            <p className="text-sm font-mono">Email: admin@toastytech.com</p>
-            <p className="text-sm font-mono">Senha: toasty123</p>
-          </div>
         </CardContent>
       </Card>
     </div>
