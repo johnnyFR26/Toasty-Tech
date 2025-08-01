@@ -4,9 +4,9 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { mockCompanies, mockProjects, statusLabels, statusColors } from "@/lib/mock-data"
-import { Building2, Mail, Phone, Globe, FolderKanban, DollarSign, TrendingUp, Search, Plus } from "lucide-react"
+import { NewCompanyDialog } from "@/components/new-company-dialog"
+import { Building2, Mail, Phone, Globe, FolderKanban, DollarSign, TrendingUp, Search } from "lucide-react"
 
 export default function CompaniesPage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -48,10 +48,7 @@ export default function CompaniesPage() {
           <h1 className="text-3xl font-bold tracking-tight">Empresas</h1>
           <p className="text-muted-foreground">Gerencie as empresas clientes da Toasty Tech</p>
         </div>
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          Nova Empresa
-        </Button>
+        <NewCompanyDialog />
       </div>
 
       {/* Barra de Pesquisa */}
@@ -188,10 +185,7 @@ export default function CompaniesPage() {
             <p className="text-muted-foreground mb-4">
               {searchTerm ? "Tente ajustar os termos de busca" : "Comece adicionando sua primeira empresa"}
             </p>
-            <Button>
-              <Plus className="h-4 w-4 mr-2" />
-              Nova Empresa
-            </Button>
+            <NewCompanyDialog />
           </CardContent>
         </Card>
       )}
