@@ -9,13 +9,12 @@ import { AuthProvider } from "@/contexts/auth-context"
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: "Toasty Tech - Soluções Tecnológicas Inovadoras",
+  title: "Toasty Tech",
   description:
     "Transformamos suas ideias em soluções digitais de alta qualidade. Desenvolvimento web, mobile e consultoria tecnológica.",
   icons: {
     icon: "/logo2.jpg",
   },
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
