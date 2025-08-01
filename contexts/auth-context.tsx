@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     // Credenciais fixas para demonstração
-    if (email === "admin@toastytech.com" && password === "toasty123") {
+    if (email === "admin@toastytech.com" && password === "M1guelD0Rab@oLe1toso") {
       const userData = {
         id: "1",
         email: "admin@toastytech.com",
