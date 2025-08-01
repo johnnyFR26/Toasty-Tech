@@ -11,27 +11,11 @@ import {
   statusColors,
   categoryLabels,
 } from "@/lib/mock-data"
-import { Building2, FolderKanban, DollarSign, TrendingUp, Clock, BarChart3 } from "lucide-react"
+import { NewCompanyDialog } from "@/components/new-company-dialog"
+import { NewProjectDialog } from "@/components/new-project-dialog"
+import { Building2, FolderKanban, DollarSign, TrendingUp, AlertCircle, CheckCircle, Clock } from "lucide-react"
 
 export default function DashboardPage() {
-  const stats = mockDashboardStats
-  const activeProjects = mockProjects.filter(
-    (p) => p.isActive && ["development", "testing", "planning"].includes(p.status),
-  )
-
-  const revenueByCategory = mockProjects.reduce(
-    (acc, project) => {
-      const category = project.category
-      if (!acc[category]) {
-        acc[category] = { revenue: 0, count: 0 }
-      }
-      acc[category].revenue += project.monthlyRevenue
-      acc[category].count += 1
-      return acc
-    },
-    {} as Record<string, { revenue: number; count: number }>,
-  )
-
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("pt-BR", {
       style: "currency",
@@ -39,14 +23,67 @@ export default function DashboardPage() {
     }).format(value)
   }
 
+  const getCompanyName = (companyId: string) => {
+    return mockCompanies.find((c) => c.id === companyId)?.name || "Empresa não encontrada"
+  }
+
+  const getProjectProgress = (status: string) => {
+    switch (status) {
+      case "planning":
+        return 10
+      case "development":
+        return 50
+      case "testing":
+        return 80
+      case "deployed":
+        return 100
+      case "maintenance":
+        return 100
+      case "paused":
+        return 30
+      case "cancelled":
+        return 0
+      default:
+        return 0
+    }
+  }
+
+  // Projetos em andamento
+  const projectsInProgress = mockProjects.filter((p) => ["development", "testing", "planning"].includes(p.status))
+
+  // Receita por categoria
+  const revenueByCategory = Object.keys(categoryLabels)
+    .map((category) => {
+      const categoryProjects = mockProjects.filter((p) => p.category === category)
+      const revenue = categoryProjects.reduce((sum, p) => sum + p.monthlyRevenue, 0)
+      const costs = categoryProjects.reduce((sum, p) => sum + p.serverCost, 0)
+
+      return {
+        category,
+        label: categoryLabels[category as keyof typeof categoryLabels],
+        revenue,
+        profit: revenue - costs,
+        projects: categoryProjects.length,
+      }
+    })
+    .filter((cat) => cat.projects > 0)
+    .sort((a, b) => b.revenue - a.revenue)
+
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground">Visão geral dos projetos e faturamento da Toasty Tech</p>
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+          <p className="text-muted-foreground">Visão geral da Toasty Tech</p>
+        </div>
+        <div className="flex gap-2">
+          <NewCompanyDialog />
+          <NewProjectDialog />
+        </div>
       </div>
 
-      {/* Cards de Estatísticas */}
+      {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -54,7 +91,7 @@ export default function DashboardPage() {
             <Building2 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalCompanies}</div>
+            <div className="text-2xl font-bold">{mockDashboardStats.totalCompanies}</div>
             <p className="text-xs text-muted-foreground">Clientes ativos</p>
           </CardContent>
         </Card>
@@ -65,31 +102,31 @@ export default function DashboardPage() {
             <FolderKanban className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.activeProjects}</div>
-            <p className="text-xs text-muted-foreground">de {stats.totalProjects} projetos totais</p>
+            <div className="text-2xl font-bold">{mockDashboardStats.activeProjects}</div>
+            <p className="text-xs text-muted-foreground">de {mockDashboardStats.totalProjects} total</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Receita Mensal</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <DollarSign className="h-4 w-4 text-green-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{formatCurrency(stats.totalRevenue)}</div>
-            <p className="text-xs text-muted-foreground">Receita bruta mensal</p>
+            <div className="text-2xl font-bold">{formatCurrency(mockDashboardStats.totalRevenue)}</div>
+            <p className="text-xs text-muted-foreground">Custos: {formatCurrency(mockDashboardStats.totalCosts)}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Lucro Mensal</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            <TrendingUp className="h-4 w-4 text-purple-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">{formatCurrency(stats.totalProfit)}</div>
+            <div className="text-2xl font-bold">{formatCurrency(mockDashboardStats.totalProfit)}</div>
             <p className="text-xs text-muted-foreground">
-              Margem: {((stats.totalProfit / stats.totalRevenue) * 100).toFixed(1)}%
+              Margem: {((mockDashboardStats.totalProfit / mockDashboardStats.totalRevenue) * 100).toFixed(1)}%
             </p>
           </CardContent>
         </Card>
@@ -100,37 +137,47 @@ export default function DashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Clock className="h-5 w-5" />
+              <AlertCircle className="h-5 w-5 text-yellow-600" />
               Projetos em Andamento
             </CardTitle>
-            <CardDescription>Projetos atualmente em desenvolvimento ou teste</CardDescription>
+            <CardDescription>{projectsInProgress.length} projetos em desenvolvimento</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {activeProjects.slice(0, 5).map((project) => {
-                const company = mockCompanies.find((c) => c.id === project.companyId)
-                const progress =
-                  project.status === "planning"
-                    ? 10
-                    : project.status === "development"
-                      ? 60
-                      : project.status === "testing"
-                        ? 85
-                        : 100
-
-                return (
-                  <div key={project.id} className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">{project.name}</p>
-                        <p className="text-sm text-muted-foreground">{company?.name}</p>
-                      </div>
-                      <Badge className={statusColors[project.status]}>{statusLabels[project.status]}</Badge>
+              {projectsInProgress.slice(0, 5).map((project) => (
+                <div key={project.id} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-sm">{project.name}</p>
+                      <p className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Building2 className="h-3 w-3" />
+                        {getCompanyName(project.companyId)}
+                      </p>
                     </div>
-                    <Progress value={progress} className="h-2" />
+                    <Badge className={statusColors[project.status as keyof typeof statusColors]}>
+                      {statusLabels[project.status as keyof typeof statusLabels]}
+                    </Badge>
                   </div>
-                )
-              })}
+                  <div className="flex items-center gap-2">
+                    <Progress value={getProjectProgress(project.status)} className="flex-1 h-2" />
+                    <span className="text-xs text-muted-foreground w-10">{getProjectProgress(project.status)}%</span>
+                  </div>
+                </div>
+              ))}
+
+              {projectsInProgress.length === 0 && (
+                <div className="text-center py-8 text-muted-foreground">
+                  <CheckCircle className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                  <p>Nenhum projeto em andamento</p>
+                  <p className="text-xs">Todos os projetos estão concluídos!</p>
+                </div>
+              )}
+
+              {projectsInProgress.length > 5 && (
+                <p className="text-xs text-muted-foreground text-center pt-2">
+                  +{projectsInProgress.length - 5} projetos adicionais
+                </p>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -139,77 +186,96 @@ export default function DashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <BarChart3 className="h-5 w-5" />
+              <DollarSign className="h-5 w-5 text-green-600" />
               Receita por Categoria
             </CardTitle>
-            <CardDescription>Distribuição da receita mensal por tipo de projeto</CardDescription>
+            <CardDescription>Distribuição da receita por tipo de projeto</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {Object.entries(revenueByCategory)
-                .sort(([, a], [, b]) => b.revenue - a.revenue)
-                .map(([category, data]) => (
-                  <div key={category} className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500" />
-                      <span className="font-medium">{categoryLabels[category as keyof typeof categoryLabels]}</span>
-                      <Badge variant="secondary">{data.count}</Badge>
-                    </div>
-                    <span className="font-bold">{formatCurrency(data.revenue)}</span>
+              {revenueByCategory.map((category) => (
+                <div key={category.category} className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline">{category.label}</Badge>
+                    <span className="text-xs text-muted-foreground">
+                      ({category.projects} projeto{category.projects !== 1 ? "s" : ""})
+                    </span>
                   </div>
-                ))}
+                  <div className="text-right">
+                    <p className="font-medium text-green-600">{formatCurrency(category.revenue)}</p>
+                    <p className="text-xs text-muted-foreground">Lucro: {formatCurrency(category.profit)}</p>
+                  </div>
+                </div>
+              ))}
+
+              {revenueByCategory.length === 0 && (
+                <div className="text-center py-8 text-muted-foreground">
+                  <FolderKanban className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                  <p>Nenhum projeto cadastrado</p>
+                  <NewProjectDialog
+                    trigger={
+                      <button className="text-xs text-purple-600 hover:underline mt-2">Criar primeiro projeto</button>
+                    }
+                  />
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Lista de Todos os Projetos */}
+      {/* Lista Completa de Projetos */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FolderKanban className="h-5 w-5" />
             Todos os Projetos
           </CardTitle>
-          <CardDescription>Lista completa de projetos com informações financeiras</CardDescription>
+          <CardDescription>Lista completa com informações financeiras</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {mockProjects.map((project) => {
-              const company = mockCompanies.find((c) => c.id === project.companyId)
-              const profit = project.monthlyRevenue - project.serverCost
-              const margin = (profit / project.monthlyRevenue) * 100
-
-              return (
-                <div key={project.id} className="flex items-center justify-between p-4 border rounded-lg">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-medium">{project.name}</h3>
-                      <Badge className={statusColors[project.status]}>{statusLabels[project.status]}</Badge>
-                      <Badge variant="outline">{categoryLabels[project.category]}</Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">{company?.name}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{project.description}</p>
+          <div className="space-y-3">
+            {mockProjects.map((project) => (
+              <div
+                key={project.id}
+                className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/50 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    {project.status === "deployed" && <CheckCircle className="h-4 w-4 text-green-600" />}
+                    {["development", "testing"].includes(project.status) && (
+                      <AlertCircle className="h-4 w-4 text-yellow-600" />
+                    )}
+                    {project.status === "planning" && <Clock className="h-4 w-4 text-blue-600" />}
                   </div>
-                  <div className="text-right space-y-1">
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <p className="text-sm font-medium">Receita</p>
-                        <p className="text-lg font-bold text-green-600">{formatCurrency(project.monthlyRevenue)}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">Custo</p>
-                        <p className="text-lg font-bold text-red-600">{formatCurrency(project.serverCost)}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">Lucro</p>
-                        <p className="text-lg font-bold text-blue-600">{formatCurrency(profit)}</p>
-                      </div>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Margem: {margin.toFixed(1)}%</p>
+                  <div>
+                    <p className="font-medium">{project.name}</p>
+                    <p className="text-sm text-muted-foreground flex items-center gap-2">
+                      <Building2 className="h-3 w-3" />
+                      {getCompanyName(project.companyId)}
+                      <Badge variant="outline" className="text-xs">
+                        {categoryLabels[project.category]}
+                      </Badge>
+                    </p>
                   </div>
                 </div>
-              )
-            })}
+                <div className="text-right">
+                  <p className="font-bold text-green-600">{formatCurrency(project.monthlyRevenue)}</p>
+                  <p className="text-sm text-purple-600">
+                    Lucro: {formatCurrency(project.monthlyRevenue - project.serverCost)}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            {mockProjects.length === 0 && (
+              <div className="text-center py-12 text-muted-foreground">
+                <FolderKanban className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                <h3 className="text-lg font-medium mb-2">Nenhum projeto cadastrado</h3>
+                <p className="mb-4">Comece criando seu primeiro projeto</p>
+                <NewProjectDialog />
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
