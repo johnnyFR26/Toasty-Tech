@@ -3,6 +3,7 @@ export interface Company {
   name: string
   email: string
   phone: string
+  website?: string
   createdAt: Date
   projects: Project[]
 }
@@ -12,13 +13,13 @@ export interface Project {
   name: string
   description: string
   category: ProjectCategory
-  status: "active" | "inactive"
-  isInProgress: boolean
+  status: ProjectStatus
   companyId: string
   monthlyRevenue: number
   serverCost: number
-  createdAt: Date
-  updatedAt: Date
+  startDate: Date
+  endDate?: Date
+  isActive: boolean
 }
 
 export type ProjectCategory =
@@ -31,16 +32,22 @@ export type ProjectCategory =
   | "portfolio"
   | "other"
 
-export interface User {
-  id: string
-  email: string
-  name: string
-}
+export type ProjectStatus = "planning" | "development" | "testing" | "deployed" | "maintenance" | "paused" | "cancelled"
 
-export interface RevenueReport {
-  month: string
+export interface DashboardStats {
+  totalCompanies: number
+  totalProjects: number
+  activeProjects: number
   totalRevenue: number
   totalCosts: number
+  totalProfit: number
+}
+
+export interface MonthlyReport {
+  month: string
+  revenue: number
+  costs: number
   profit: number
-  activeProjects: number
+  newProjects: number
+  completedProjects: number
 }

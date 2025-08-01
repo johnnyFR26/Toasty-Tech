@@ -2,7 +2,12 @@
 
 import type React from "react"
 import { createContext, useContext, useState, useEffect } from "react"
-import type { User } from "@/types/dashboard"
+
+interface User {
+  id: string
+  email: string
+  name: string
+}
 
 interface AuthContextType {
   user: User | null
@@ -27,9 +32,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // Simulação de login - em produção seria uma chamada para API
+    // Credenciais fixas para demonstração
     if (email === "admin@toastytech.com" && password === "toasty123") {
-      const userData: User = {
+      const userData = {
         id: "1",
         email: "admin@toastytech.com",
         name: "Admin Toasty Tech",

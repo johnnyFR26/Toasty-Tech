@@ -30,7 +30,7 @@ export default function LoginPage() {
       if (success) {
         router.push("/dashboard")
       } else {
-        setError("Email ou senha incorretos")
+        setError("Credenciais inválidas. Tente novamente.")
       }
     } catch (err) {
       setError("Erro ao fazer login. Tente novamente.")
@@ -54,40 +54,30 @@ export default function LoginPage() {
               </defs>
 
               {/* Torradeira */}
-              <rect
-                x="25"
-                y="30"
-                width="50"
-                height="35"
-                rx="5"
-                fill="url(#toasterGradient)"
-                stroke="#4C1D95"
-                strokeWidth="2"
-              />
-              <rect x="30" y="35" width="15" height="25" rx="2" fill="#F3F4F6" stroke="#6B7280" strokeWidth="1" />
-              <rect x="55" y="35" width="15" height="25" rx="2" fill="#F3F4F6" stroke="#6B7280" strokeWidth="1" />
-
-              {/* Vapor/Calor */}
-              <path d="M35 25 Q37 20 35 15" stroke="#F59E0B" strokeWidth="2" fill="none" strokeLinecap="round" />
-              <path d="M50 25 Q52 20 50 15" stroke="#F59E0B" strokeWidth="2" fill="none" strokeLinecap="round" />
-              <path d="M65 25 Q67 20 65 15" stroke="#F59E0B" strokeWidth="2" fill="none" strokeLinecap="round" />
+              <rect x="25" y="35" width="50" height="35" rx="5" fill="url(#toasterGradient)" />
+              <rect x="30" y="40" width="8" height="20" rx="2" fill="white" opacity="0.3" />
+              <rect x="42" y="40" width="8" height="20" rx="2" fill="white" opacity="0.3" />
+              <rect x="54" y="40" width="8" height="20" rx="2" fill="white" opacity="0.3" />
 
               {/* Painel de controle */}
-              <circle cx="40" cy="75" r="3" fill="#10B981" />
-              <circle cx="50" cy="75" r="3" fill="#EF4444" />
-              <circle cx="60" cy="75" r="3" fill="#3B82F6" />
+              <circle cx="70" cy="50" r="3" fill="#10B981" />
+              <circle cx="70" cy="58" r="2" fill="#F59E0B" />
 
-              {/* Circuitos tech */}
-              <path
-                d="M15 15 L25 25 M75 25 L85 15 M15 85 L25 75 M75 75 L85 85"
-                stroke="#8B5CF6"
-                strokeWidth="2"
-                fill="none"
-              />
+              {/* Vapor/Calor */}
+              <path d="M35 30 Q37 25 35 20" stroke="#8B5CF6" strokeWidth="2" fill="none" opacity="0.6" />
+              <path d="M45 32 Q47 27 45 22" stroke="#06B6D4" strokeWidth="2" fill="none" opacity="0.6" />
+              <path d="M55 30 Q57 25 55 20" stroke="#8B5CF6" strokeWidth="2" fill="none" opacity="0.6" />
+
+              {/* Circuitos Tech */}
               <circle cx="15" cy="15" r="2" fill="#06B6D4" />
-              <circle cx="85" cy="15" r="2" fill="#06B6D4" />
-              <circle cx="15" cy="85" r="2" fill="#06B6D4" />
+              <circle cx="85" cy="15" r="2" fill="#8B5CF6" />
+              <circle cx="15" cy="85" r="2" fill="#8B5CF6" />
               <circle cx="85" cy="85" r="2" fill="#06B6D4" />
+
+              <path d="M15 15 L25 25" stroke="#06B6D4" strokeWidth="1" opacity="0.4" />
+              <path d="M85 15 L75 25" stroke="#8B5CF6" strokeWidth="1" opacity="0.4" />
+              <path d="M15 85 L25 75" stroke="#8B5CF6" strokeWidth="1" opacity="0.4" />
+              <path d="M85 85 L75 75" stroke="#06B6D4" strokeWidth="1" opacity="0.4" />
             </svg>
           </div>
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">
@@ -119,11 +109,13 @@ export default function LoginPage() {
                 required
               />
             </div>
+
             {error && (
               <Alert variant="destructive">
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
+
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? (
                 <>
@@ -135,10 +127,11 @@ export default function LoginPage() {
               )}
             </Button>
           </form>
-          <div className="mt-4 text-center text-sm text-muted-foreground">
-            <p>Credenciais de teste:</p>
-            <p>Email: admin@toastytech.com</p>
-            <p>Senha: toasty123</p>
+
+          <div className="mt-6 p-4 bg-muted rounded-lg">
+            <p className="text-sm text-muted-foreground mb-2">Credenciais de teste:</p>
+            <p className="text-sm font-mono">Email: admin@toastytech.com</p>
+            <p className="text-sm font-mono">Senha: toasty123</p>
           </div>
         </CardContent>
       </Card>

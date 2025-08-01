@@ -3,46 +3,70 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { mockProjects, mockCompanies, mockRevenueReports, categoryLabels } from "@/lib/mock-data"
-import { Building2, FolderOpen, DollarSign, Server, TrendingUp, Clock } from "lucide-react"
+import {
+  mockDashboardStats,
+  mockProjects,
+  mockCompanies,
+  statusLabels,
+  statusColors,
+  categoryLabels,
+} from "@/lib/mock-data"
+import { Building2, FolderKanban, DollarSign, TrendingUp, Clock, BarChart3 } from "lucide-react"
 
 export default function DashboardPage() {
-  const activeProjects = mockProjects.filter((p) => p.status === "active")
-  const inProgressProjects = mockProjects.filter((p) => p.isInProgress)
-  const totalRevenue = activeProjects.reduce((sum, p) => sum + p.monthlyRevenue, 0)
-  const totalCosts = activeProjects.reduce((sum, p) => sum + p.serverCost, 0)
-  const profit = totalRevenue - totalCosts
-  const currentMonth = mockRevenueReports[mockRevenueReports.length - 1]
+  const stats = mockDashboardStats
+  const activeProjects = mockProjects.filter(
+    (p) => p.isActive && ["development", "testing", "planning"].includes(p.status),
+  )
+
+  const revenueByCategory = mockProjects.reduce(
+    (acc, project) => {
+      const category = project.category
+      if (!acc[category]) {
+        acc[category] = { revenue: 0, count: 0 }
+      }
+      acc[category].revenue += project.monthlyRevenue
+      acc[category].count += 1
+      return acc
+    },
+    {} as Record<string, { revenue: number; count: number }>,
+  )
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(value)
+  }
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">Visão geral dos projetos e faturamento da Toasty Tech</p>
       </div>
 
-      {/* Cards de estatísticas */}
+      {/* Cards de Estatísticas */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Empresas Ativas</CardTitle>
+            <CardTitle className="text-sm font-medium">Total de Empresas</CardTitle>
             <Building2 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{mockCompanies.length}</div>
-            <p className="text-xs text-muted-foreground">Total de empresas cadastradas</p>
+            <div className="text-2xl font-bold">{stats.totalCompanies}</div>
+            <p className="text-xs text-muted-foreground">Clientes ativos</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Projetos Ativos</CardTitle>
-            <FolderOpen className="h-4 w-4 text-muted-foreground" />
+            <FolderKanban className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{activeProjects.length}</div>
-            <p className="text-xs text-muted-foreground">{inProgressProjects.length} em andamento</p>
+            <div className="text-2xl font-bold">{stats.activeProjects}</div>
+            <p className="text-xs text-muted-foreground">de {stats.totalProjects} projetos totais</p>
           </CardContent>
         </Card>
 
@@ -52,8 +76,8 @@ export default function DashboardPage() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">R$ {totalRevenue.toLocaleString("pt-BR")}</div>
-            <p className="text-xs text-muted-foreground">Custos: R$ {totalCosts.toLocaleString("pt-BR")}</p>
+            <div className="text-2xl font-bold">{formatCurrency(stats.totalRevenue)}</div>
+            <p className="text-xs text-muted-foreground">Receita bruta mensal</p>
           </CardContent>
         </Card>
 
@@ -63,13 +87,15 @@ export default function DashboardPage() {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">R$ {profit.toLocaleString("pt-BR")}</div>
-            <p className="text-xs text-muted-foreground">Margem: {((profit / totalRevenue) * 100).toFixed(1)}%</p>
+            <div className="text-2xl font-bold text-green-600">{formatCurrency(stats.totalProfit)}</div>
+            <p className="text-xs text-muted-foreground">
+              Margem: {((stats.totalProfit / stats.totalRevenue) * 100).toFixed(1)}%
+            </p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Projetos em Andamento */}
         <Card>
           <CardHeader>
@@ -77,105 +103,109 @@ export default function DashboardPage() {
               <Clock className="h-5 w-5" />
               Projetos em Andamento
             </CardTitle>
-            <CardDescription>Projetos que estão sendo desenvolvidos atualmente</CardDescription>
+            <CardDescription>Projetos atualmente em desenvolvimento ou teste</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            {inProgressProjects.map((project) => {
-              const company = mockCompanies.find((c) => c.id === project.companyId)
-              return (
-                <div key={project.id} className="flex items-center justify-between p-3 border rounded-lg">
-                  <div className="space-y-1">
-                    <p className="font-medium">{project.name}</p>
-                    <p className="text-sm text-muted-foreground">{company?.name}</p>
-                    <Badge variant="secondary">{categoryLabels[project.category]}</Badge>
+          <CardContent>
+            <div className="space-y-4">
+              {activeProjects.slice(0, 5).map((project) => {
+                const company = mockCompanies.find((c) => c.id === project.companyId)
+                const progress =
+                  project.status === "planning"
+                    ? 10
+                    : project.status === "development"
+                      ? 60
+                      : project.status === "testing"
+                        ? 85
+                        : 100
+
+                return (
+                  <div key={project.id} className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">{project.name}</p>
+                        <p className="text-sm text-muted-foreground">{company?.name}</p>
+                      </div>
+                      <Badge className={statusColors[project.status]}>{statusLabels[project.status]}</Badge>
+                    </div>
+                    <Progress value={progress} className="h-2" />
                   </div>
-                  <div className="text-right">
-                    <p className="font-medium text-green-600">
-                      R$ {project.monthlyRevenue.toLocaleString("pt-BR")}/mês
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Custo: R$ {project.serverCost.toLocaleString("pt-BR")}
-                    </p>
-                  </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </CardContent>
         </Card>
 
-        {/* Resumo Financeiro */}
+        {/* Receita por Categoria */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Server className="h-5 w-5" />
-              Resumo Financeiro
+              <BarChart3 className="h-5 w-5" />
+              Receita por Categoria
             </CardTitle>
-            <CardDescription>Análise de custos e receitas por categoria</CardDescription>
+            <CardDescription>Distribuição da receita mensal por tipo de projeto</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            {Object.entries(categoryLabels).map(([category, label]) => {
-              const categoryProjects = activeProjects.filter((p) => p.category === category)
-              if (categoryProjects.length === 0) return null
-
-              const categoryRevenue = categoryProjects.reduce((sum, p) => sum + p.monthlyRevenue, 0)
-              const categoryCosts = categoryProjects.reduce((sum, p) => sum + p.serverCost, 0)
-              const categoryProfit = categoryRevenue - categoryCosts
-              const profitMargin = (categoryProfit / categoryRevenue) * 100
-
-              return (
-                <div key={category} className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">{label}</span>
-                    <span className="text-sm text-muted-foreground">
-                      {categoryProjects.length} projeto{categoryProjects.length !== 1 ? "s" : ""}
-                    </span>
+          <CardContent>
+            <div className="space-y-4">
+              {Object.entries(revenueByCategory)
+                .sort(([, a], [, b]) => b.revenue - a.revenue)
+                .map(([category, data]) => (
+                  <div key={category} className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500" />
+                      <span className="font-medium">{categoryLabels[category as keyof typeof categoryLabels]}</span>
+                      <Badge variant="secondary">{data.count}</Badge>
+                    </div>
+                    <span className="font-bold">{formatCurrency(data.revenue)}</span>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span>Receita: R$ {categoryRevenue.toLocaleString("pt-BR")}</span>
-                    <span className="text-green-600">Lucro: {profitMargin.toFixed(1)}%</span>
-                  </div>
-                  <Progress value={profitMargin} className="h-2" />
-                </div>
-              )
-            })}
+                ))}
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Projetos Recentes */}
+      {/* Lista de Todos os Projetos */}
       <Card>
         <CardHeader>
-          <CardTitle>Todos os Projetos</CardTitle>
-          <CardDescription>Lista completa de projetos com status e informações financeiras</CardDescription>
+          <CardTitle className="flex items-center gap-2">
+            <FolderKanban className="h-5 w-5" />
+            Todos os Projetos
+          </CardTitle>
+          <CardDescription>Lista completa de projetos com informações financeiras</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {mockProjects.map((project) => {
               const company = mockCompanies.find((c) => c.id === project.companyId)
+              const profit = project.monthlyRevenue - project.serverCost
+              const margin = (profit / project.monthlyRevenue) * 100
+
               return (
                 <div key={project.id} className="flex items-center justify-between p-4 border rounded-lg">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <p className="font-medium">{project.name}</p>
-                      <Badge variant={project.status === "active" ? "default" : "secondary"}>
-                        {project.status === "active" ? "Ativo" : "Inativo"}
-                      </Badge>
-                      {project.isInProgress && <Badge variant="outline">Em Andamento</Badge>}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-medium">{project.name}</h3>
+                      <Badge className={statusColors[project.status]}>{statusLabels[project.status]}</Badge>
+                      <Badge variant="outline">{categoryLabels[project.category]}</Badge>
                     </div>
                     <p className="text-sm text-muted-foreground">{company?.name}</p>
-                    <p className="text-sm text-muted-foreground">{project.description}</p>
-                    <Badge variant="secondary">{categoryLabels[project.category]}</Badge>
+                    <p className="text-xs text-muted-foreground mt-1">{project.description}</p>
                   </div>
                   <div className="text-right space-y-1">
-                    <p className="font-medium text-green-600">
-                      R$ {project.monthlyRevenue.toLocaleString("pt-BR")}/mês
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Custo: R$ {project.serverCost.toLocaleString("pt-BR")}/mês
-                    </p>
-                    <p className="text-sm font-medium">
-                      Lucro: R$ {(project.monthlyRevenue - project.serverCost).toLocaleString("pt-BR")}
-                    </p>
+                    <div className="flex items-center gap-4">
+                      <div>
+                        <p className="text-sm font-medium">Receita</p>
+                        <p className="text-lg font-bold text-green-600">{formatCurrency(project.monthlyRevenue)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Custo</p>
+                        <p className="text-lg font-bold text-red-600">{formatCurrency(project.serverCost)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Lucro</p>
+                        <p className="text-lg font-bold text-blue-600">{formatCurrency(profit)}</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Margem: {margin.toFixed(1)}%</p>
                   </div>
                 </div>
               )
