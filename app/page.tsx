@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Code, Smartphone, Globe, Database, Users, Star, ArrowRight, Mail, Phone, MapPin } from "lucide-react"
+import { Code, Smartphone, Globe, Database, Users, Star, ArrowRight, Mail, Phone, MapPin, Instagram } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
@@ -16,6 +16,7 @@ import { ThemeProvider } from "@/contexts/theme-context"
 import { I18nProvider, useI18n } from "@/contexts/i18n-context"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageSelector } from "@/components/language-selector"
+import { title } from "process"
 
 // Animation variants
 const fadeInUp = {
@@ -284,6 +285,13 @@ function LandingPageContent() {
             <AnimatedSection className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-8">
               {[
                 {
+                  icon: Instagram,
+                  title: t("services.trafic.title"),
+                  description: t("services.trafic.description"),
+                  features: ["Instagram", "Facebook", "Google", "Meta"],
+                  price: "R$ 1.500",
+                },
+                {
                   icon: Globe,
                   title: t("services.web.title"),
                   description: t("services.web.description"),
@@ -313,7 +321,7 @@ function LandingPageContent() {
                 >
                   <Card className="border-purple-200 dark:border-purple-800 hover:shadow-lg dark:hover:shadow-purple-500/25 transition-all duration-300 bg-white dark:bg-gray-800 h-full">
                     <CardHeader>
-                      <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
+                      <motion.div>
                         <service.icon className="h-10 w-10 text-purple-600 dark:text-purple-400 mb-2" />
                       </motion.div>
                       <CardTitle className="dark:text-white">{service.title}</CardTitle>
@@ -377,26 +385,26 @@ function LandingPageContent() {
             <AnimatedSection className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-8">
               {[
                 {
-                  title: "E-commerce Fashion",
+                  title: "E-commerce platform",
                   type: "Web",
                   description:
                     "Plataforma completa de vendas online com sistema de pagamento integrado e painel administrativo.",
                   testimonial: "Excelente trabalho! A equipe entregou exatamente o que precisávamos.",
-                  image: "/placeholder.svg?height=200&width=400&text=E-commerce+Fashion",
+                  image: "/plataforma-marketplace-capa-toastytech-v1.png",
                 },
                 {
-                  title: "App Fitness Tracker",
+                  title: "App de gestão financiera",
                   type: "Mobile",
-                  description: "Aplicativo para acompanhamento de exercícios com integração a wearables e gamificação.",
+                  description: "Aplicativo para acompanhar finanças pessoais e empresariais com funcionalidades avançadas e auxilio de IA.",
                   testimonial: "App incrível! Superou nossas expectativas em funcionalidade e design.",
-                  image: "/placeholder.svg?height=200&width=400&text=Fitness+App",
+                  image: "/plataforma-finanz-capa-toastytech-v1.png",
                 },
                 {
                   title: "Sistema ERP Personalizado",
                   type: "Sistema",
                   description: "Sistema completo de gestão empresarial com módulos financeiro, estoque e vendas.",
                   testimonial: "Sistema perfeito para nossa empresa. Aumentou nossa produtividade em 40%.",
-                  image: "/placeholder.svg?height=200&width=400&text=ERP+System",
+                  image: "/plataforma-attendance-capa-toastytech-v1.png",
                 },
                 {
                   title: "Plataforma Educacional",
@@ -404,8 +412,24 @@ function LandingPageContent() {
                   description:
                     "Portal de ensino online com videoaulas, exercícios interativos e acompanhamento de progresso.",
                   testimonial: "Transformou nossa forma de ensinar. Alunos mais engajados e resultados melhores.",
-                  image: "/placeholder.svg?height=200&width=400&text=Education+Platform",
+                  image: "/plataforma-minerva-capa-toastytech-v1.png",
                 },
+                {
+                  title: "SAAS de geração de blogs",
+                  type: "Web",
+                  description:
+                    "Plataforma de geração de blogs com editor de texto e recursos de gestão de conteúdo.",
+                  testimonial: "Excelente trabalho! A equipe entregou exatamente o que precisávamos.",
+                  image: "/plataforma-myownblog-capa-toastytech-v1.png",
+                },
+                {
+                  title: "Plataforma para ensino de Libras",
+                  type: "Web",
+                  description:
+                    "Plataforma de ensino de Libras com gamificacao, exercícios praticos interativos e acompanhamento de progresso.",
+                  testimonial: "Excelente trabalho! A equipe entregou exatamente o que precisávamos.",
+                  image: "/plataforma-teclibras-capa-toastytech-v1.png",
+                }
               ].map((project, index) => (
                 <motion.div
                   key={index}

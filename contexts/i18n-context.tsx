@@ -79,6 +79,16 @@ const translations: Translations = {
     en: "We offer complete technology solutions, from web development to mobile applications and complex systems.",
     fr: "Nous offrons des solutions technologiques complètes, du développement web aux applications mobiles et systèmes complexes.",
   },
+  "services.trafic.title": {
+    pt: "Gestão de Trafego",
+    en: "Traffic Management",
+    fr: "Gestion du Traffic",
+  },
+  "services.trafic.description": {
+    pt: "Aumente a eficiência e a produtividade do seu negócio com soluções de gerenciamento de trafego.",
+    en: "Increase efficiency and productivity of your business with traffic management solutions.",
+    fr: "Augmentez l'efficacité et la productivité de votre entreprise avec des solutions de gestion du trafic.",
+  },
   "services.web.title": {
     pt: "Desenvolvimento Web",
     en: "Web Development",
