@@ -283,7 +283,7 @@ function LandingPageContent() {
                 </motion.p>
               </div>
             </AnimatedSection>
-            <AnimatedSection className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-8">
+            <AnimatedSection className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-4 lg:gap-8">
               {[
                 {
                   icon: Instagram,
