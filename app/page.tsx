@@ -17,6 +17,7 @@ import { I18nProvider, useI18n } from "@/contexts/i18n-context"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageSelector } from "@/components/language-selector"
 import { title } from "process"
+import { Description } from "@radix-ui/react-toast"
 
 // Animation variants
 const fadeInUp = {
@@ -429,6 +430,21 @@ function LandingPageContent() {
                     "Plataforma de ensino de Libras com gamificacao, exercícios praticos interativos e acompanhamento de progresso.",
                   testimonial: "Excelente trabalho! A equipe entregou exatamente o que precisávamos.",
                   image: "/plataforma-teclibras-capa-toastytech-v1.png",
+                },
+                {
+                  title: "Jogo educativo de biologia",
+                  type: "web",
+                  description: "Jogo online para promover o conhecimento da fauna",
+                  testimonial: "A velocidade da entrega me surpreendeu!",
+                  image: "/plataforma-animaldle-capa-toastytech-v1.png"
+                },
+                {
+                  title: "Philosopher guess",
+                  type: "Mobile",
+                  description: "Jogo de preparaçao para vestibular de filosofia",
+                  testimonial: "Superou todas as minhas expectativas",
+                  image: "/plataforma-filosofo-capa-toastytech-v1.png"
+
                 }
               ].map((project, index) => (
                 <motion.div
