@@ -13,9 +13,8 @@ export const metadata: Metadata = {
   description:
     "Transformamos suas ideias em soluções digitais de alta qualidade. Desenvolvimento web, mobile e consultoria tecnológica.",
   icons: {
-    icon: "/logo2.jpg",
+    icon: "/SAVE_20251010_213335.jpg",
   },
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
