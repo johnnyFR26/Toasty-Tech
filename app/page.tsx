@@ -126,7 +126,7 @@ function LandingPageContent() {
         <Link href="/" className="flex items-center space-x-2">
           <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
             <Image
-              src="/logo2.jpg"
+              src="/SAVE_20251010_213335.jpg"
               alt="Toasty Tech Logo"
               width={40}
               height={40}
@@ -243,7 +243,7 @@ function LandingPageContent() {
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
                     <Image
-                      src="/logo2.jpg"
+                      src="/SAVE_20251010_213335.jpg"
                       alt="Toasty Tech Logo"
                       width={400}
                       height={400}
