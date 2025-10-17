@@ -9,7 +9,7 @@ export const mockMembers: Member[] = [
     photo: "/placeholder-user.jpg",
     position: "CEO & Full cycle Developer",
     bio: "Fundador da Toasty Tech, apaixonado por criar soluções inovadoras que transformam negócios. Especialista em desenvolvimento web e mobile com foco em aplicações escaláveis.",
-    projects: ["1", "2", "4"],
+    projects: ["1", "2", "4", "12", "11", "10", "9"],
     joinedAt: new Date("2023-01-15"),
     skills: ["React", "Next.js", "Node.js", "TypeScript", "Angular", "Microserviços", "Go"],
     social: {
