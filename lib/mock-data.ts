@@ -187,8 +187,8 @@ export const mockProjects: Project[] = [
   },
   {
     id: "12",
-    name: "Piatia",
-    description: "Loja virtual com sistema de pagamentos",
+    name: "Pitaia",
+    description: "Loja virtual com sistema de valores flutuantes controlado por IA",
     category: "e-commerce",
     status: "deployed",
     companyId: "3",
