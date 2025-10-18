@@ -38,7 +38,7 @@ export const mockMembers: Member[] = [
     name: "Helena Neves",
     email: "helenanevesdesign@gmail.com",
     phone: "+55 13 97413-5094",
-    photo: "/placeholder-user.jpg",
+    photo: "/members/helena.jpeg",
     position: "Designer & Front-end",
     bio: "Focada em design e tecnologia, crio interfaces e identidades visuais que unem estética e propósito. Trabalho com UI/UX, design gráfico e desenvolvimento web, entregando soluções digitais que encantam e funcionam.",
     projects: ["10", "12", "1"],
