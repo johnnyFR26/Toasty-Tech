@@ -4,7 +4,7 @@ export const mockMembers: Member[] = [
   {
     uuid: "550e8400-e29b-41d4-a716-446655440001",
     name: "Johnny Rabelo",
-    email: "johnny@toastytech.com",
+    email: "johnny@toastytech.com.br",
     phone: "+55 13 99673-8213",
     photo: "/members/johnny.jpeg",
     position: "CTO & Full cycle Developer",
