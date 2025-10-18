@@ -6,7 +6,7 @@ export const mockMembers: Member[] = [
     name: "Johnny Rabelo",
     email: "johnny@toastytech.com",
     phone: "+55 13 99673-8213",
-    photo: "/placeholder-user.jpg",
+    photo: "/members/johnny.jpeg",
     position: "CTO & Full cycle Developer",
     bio: "Fundador da Toasty Tech, apaixonado por criar soluções inovadoras que transformam negócios. Especialista em desenvolvimento web e mobile com foco em aplicações escaláveis.",
     projects: ["1", "2", "4", "12", "11", "10", "9"],
