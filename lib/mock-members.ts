@@ -65,6 +65,22 @@ export const mockMembers: Member[] = [
     },
   },
   {
+    uuid: "550e8400-e29b-41d4-a716-446655440005",
+    name: "Pedro Baum",
+    email: "baumpedro123@gmail.com",
+    phone: "+55 13 98138-8649",
+    photo: "/members/baum.jpeg",
+    position: "Web Developer/Marketing",
+    bio: "Co-fundador da ToastyTech especialista em comunicação e trabalho em equipe, sempre buscando manter a equipe unida e realizar um atendimento perfeito para os clientes.",
+    projects: ["12", "11", "9"],
+    joinedAt: new Date("2023-01-15"),
+    skills: ["Comunicação", "Gerenciamento de grupo", "TypeScript", "Banco de Dados", "Atendimento ao cliente"],
+    social: {
+      linkedin: "https://www.linkedin.com/in/pedro-baum-06b642327",
+      github: "https://github.com/baumpedro",
+    },
+  },
+  {
     uuid: "550e8400-e29b-41d4-a716-446655440010",
     name: "Carlos Santos",
     email: "carlos@toastytech.com",
