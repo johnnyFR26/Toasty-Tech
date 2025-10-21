@@ -20,12 +20,12 @@ export const mockMembers: Member[] = [
   {
     uuid: "550e8400-e29b-41d4-a716-446655440002",
     name: "Samuel Varoli",
-    email: "varoli@toastytech.com",
+    email: "scvaroli@outlook.com",
     phone: "+55 13 98849-1762",
     photo: "/placeholder-user.jpg",
     position: "CEO & Full Stack Developer",
     bio: "Fundador da Toasty Tech, criador de soluções digitais que transformam negócios por meio de experiências digitais marcantes. Desenvolvedor Web focado em todo tipo de usuário e negócio",
-    projects: ["10", "11", "1"],
+    projects: ["10", "11", "12"],
     joinedAt: new Date("2023-01-15"),
     skills: ["Node.js", "TypeScript", "Angular", "C++", "MySQL"],
     social: {
