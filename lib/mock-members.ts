@@ -81,6 +81,21 @@ export const mockMembers: Member[] = [
     },
   },
   {
+    uuid: "550e8400-e29b-41d4-a716-446655440006",
+    name: "Julio Lisboa",
+    email: "juliolisboabernardo@gmail.com",
+    phone: "+55 13 98871-7489",
+    photo: "/members/oar2.jpg",
+    position: "Designer",
+    bio: "Co-fundador da Toasty Tech, um cara que tem diversas ideias prontas para serem feitas. Melhorando no webdesign  e programação web.",
+    projects: ["1", "2", "4"],
+    joinedAt: new Date("2023-01-15"),
+    skills: ["HTML", "CSS", "Javascript", "Canva", "Figma"],
+    social: {
+      github: "https://github.com/JLB-mazor",
+    },
+  },
+  {
     uuid: "550e8400-e29b-41d4-a716-446655440010",
     name: "Carlos Santos",
     email: "carlos@toastytech.com",
