@@ -601,7 +601,7 @@ function LandingPageContent() {
                 </div>
                 <motion.div variants={staggerContainer} className="space-y-4">
                   {[
-                    { icon: Mail, text: "contato@toastytech.com.br" },
+                    { icon: Mail, text: "johnny@toastytech.com.br" },
                     { icon: Phone, text: "(13) 99673-8213" },
                     { icon: MapPin, text: "Santos, SP - Brasil" },
                   ].map((contact, index) => (
