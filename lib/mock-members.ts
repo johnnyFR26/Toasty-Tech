@@ -128,37 +128,6 @@ export const mockMembers: Member[] = [
       "https://www.instagram.com/nao_eh_o_eric?igsh=dmdwZ2poOGdvNnRi"
     },
   },
-  {
-    uuid: "550e8400-e29b-41d4-a716-446655440010",
-    name: "Carlos Santos",
-    email: "carlos@toastytech.com",
-    phone: "+55 21 97654-3210",
-    photo: "/placeholder-user.jpg",
-    position: "Backend Developer",
-    bio: "Especialista em arquitetura de sistemas e APIs escaláveis. Experiência em cloud computing e DevOps.",
-    projects: ["2", "4", "8"],
-    joinedAt: new Date("2023-05-10"),
-    skills: ["Node.js", "Python", "PostgreSQL", "AWS", "Docker", "Kubernetes"],
-    social: {
-      linkedin: "https://linkedin.com/in/carlossantos",
-      github: "https://github.com/carlossantos",
-    },
-  },
-  {
-    uuid: "550e8400-e29b-41d4-a716-446655440009",
-    name: "Juliana Costa",
-    email: "juliana@toastytech.com",
-    phone: "+55 31 96543-2109",
-    photo: "/placeholder-user.jpg",
-    position: "UI/UX Designer",
-    bio: "Designer focada em criar experiências digitais memoráveis. Especialista em design systems e prototipagem.",
-    projects: ["1", "4", "5", "7"],
-    joinedAt: new Date("2023-07-01"),
-    skills: ["Figma", "Adobe XD", "Sketch", "Design Systems", "User Research"],
-    social: {
-      linkedin: "https://linkedin.com/in/julianacosta",
-    },
-  },
 ]
 
 export function getMemberByUuid(uuid: string): Member | undefined {
