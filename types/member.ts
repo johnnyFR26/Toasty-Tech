@@ -13,5 +13,8 @@ export interface Member {
     linkedin?: string
     github?: string
     twitter?: string
+    instagram?: string
+    facebook?: string
+    custom?: string
   }
 }

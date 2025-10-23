@@ -15,6 +15,7 @@ export const mockMembers: Member[] = [
     social: {
       linkedin: "https://linkedin.com/in/johnnyfr26",
       github: "https://github.com/johnnyfr26",
+      custom: "https://johnny.toastytech.com.br",
     },
   },
   {
@@ -109,6 +110,22 @@ export const mockMembers: Member[] = [
     social:{ 
       linkedin: "https://www.linkedin.com/in/analadeiradev?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       github: "https://github.com/anaabdev",
+    },
+  },
+  {
+    uuid: "550e8400-e29b-41d4-a716-446655440008",
+    name: "Eric Sandes",
+    email: "ericsandes2007@gmail.com",
+    phone: "+55 13 99618-4670",
+    photo: "/members/eric.jpg",
+    position: "Designer",
+    bio: "Co-fundador da Toasty Tech, tentando fazer os programa ficarem bonito :). ",
+    projects: ["1", "2", "4"],
+    joinedAt: new Date("2023-02-15"),
+    skills: ["Figma", "Photoshop", "ClipStudio", "Krita", "Ilustrator", "UX", "UI"],
+    social: {
+      instagram:
+      "https://www.instagram.com/nao_eh_o_eric?igsh=dmdwZ2poOGdvNnRi"
     },
   },
   {

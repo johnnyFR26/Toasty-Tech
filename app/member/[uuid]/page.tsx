@@ -9,7 +9,7 @@ import { mockProjects } from "@/lib/mock-data"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, Phone, Calendar, Briefcase, Github, Linkedin, Twitter, ArrowLeft } from "lucide-react"
+import { Mail, Phone, Calendar, Briefcase, Github, Linkedin, Twitter, ArrowLeft, Instagram, LinkIcon } from "lucide-react"
 import { ThemeProvider } from "@/contexts/theme-context"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -168,6 +168,20 @@ function MemberProfileContent() {
                         <Button variant="outline" size="icon" asChild>
                           <a href={member.social.twitter} target="_blank" rel="noopener noreferrer">
                             <Twitter className="h-4 w-4" />
+                          </a>
+                        </Button>
+                      )}
+                      {member.social.instagram && (
+                        <Button variant="outline" size="icon" asChild>
+                          <a href={member.social.instagram} target="_blank" rel="noopener noreferrer">
+                            <Instagram className="h-4 w-4" />
+                          </a>
+                        </Button>
+                      )}
+                      {member.social.custom && (
+                        <Button variant="outline" size="icon" asChild>
+                          <a href={member.social.custom} target="_blank" rel="noopener noreferrer">
+                            <LinkIcon className="h-4 w-4" />
                           </a>
                         </Button>
                       )}
