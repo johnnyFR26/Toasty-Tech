@@ -120,7 +120,7 @@ export const mockMembers: Member[] = [
     photo: "/members/eric.jpg",
     position: "Designer",
     bio: "Co-fundador da Toasty Tech, tentando fazer os programa ficarem bonito :). ",
-    projects: ["1", "2", "4"],
+    projects: ["11", "12", "9"],
     joinedAt: new Date("2023-02-15"),
     skills: ["Figma", "Photoshop", "ClipStudio", "Krita", "Ilustrator", "UX", "UI"],
     social: {
