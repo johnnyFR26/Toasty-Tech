@@ -119,7 +119,7 @@ export const mockMembers: Member[] = [
     phone: "+55 13 99618-4670",
     photo: "/members/eric.jpg",
     position: "Designer",
-    bio: "Co-fundador da Toasty Tech, tentando fazer os programa ficarem bonito :). ",
+    bio: "Co-fundador da Toasty Tech, tentando fazer os programa ficarem bonito :3. ",
     projects: ["11", "12", "9"],
     joinedAt: new Date("2023-02-15"),
     skills: ["Figma", "Photoshop", "ClipStudio", "Krita", "Ilustrator", "UX", "UI"],
