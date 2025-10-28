@@ -133,7 +133,7 @@ export const mockMembers: Member[] = [
     name: "Natã Feitosa",
     email: "natafeitosa.toasty@gmail.com",
     phone: "+55 13 98809-3270",
-    photo: "/placeholder-user.jpg",
+    photo: "https://cdn.discordapp.com/attachments/1378494433326268469/1432743874769588386/IMG-20251027-WA0016.jpg",
     position: "Documentador e Analista De Documentação",
     bio: "Membro responsável pela documentação dos projetos da empresa. Se diverte enquanto trabalha, mantendo a sinergia com outros membros da equipe e o profissionalismo.",
     projects: [ "TecLibras" ],
