@@ -23,7 +23,7 @@ export const mockMembers: Member[] = [
     name: "Samuel Varoli",
     email: "scvaroli@outlook.com",
     phone: "+55 13 98849-1762",
-    photo: "https://cdn.discordapp.com/attachments/1378494433326268469/1432746632570736750/IMG-20251028-WA0007.jpg",
+    photo: "/members/samuel.jpg",
     position: "CEO & Full Stack Developer",
     bio: "Fundador da Toasty Tech, criador de soluções digitais que transformam negócios por meio de experiências digitais marcantes. Desenvolvedor Web focado em todo tipo de usuário e negócio",
     projects: ["10", "11", "12"],
