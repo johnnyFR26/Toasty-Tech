@@ -128,6 +128,36 @@ export const mockMembers: Member[] = [
       "https://www.instagram.com/nao_eh_o_eric?igsh=dmdwZ2poOGdvNnRi"
     },
   },
+  {
+    uuid: "550e8400-e29b-41d4-a716-446655440009",
+    name: "Natã Feitosa",
+    email: "natafeitosa.toasty@gmail.com",
+    phone: "+55 13 98809-3270",
+    photo: "/placeholder-user.jpg",
+    position: "Documentador e Analista De Documentação",
+    bio: "Membro responsável pela documentação dos projetos da empresa. Se diverte enquanto trabalha, mantendo a sinergia com outros membros da equipe e o profissionalismo.",
+    projects: [ "TecLibras" ],
+    joinedAt: new Date("2023-01-15"),
+    skills: [ "Comunicação" ],
+    social: {
+      github: "https://github.com/NataFeitosa",
+    },
+  },
+  {
+    uuid: "550e8400-e29b-41d4-a716-446655440010",
+    name: "Miguel Santana Gonçalves",
+    email: "miguelsg.toasty@gmail.com",
+    phone: "+55 13 991090772",
+    photo: "/placeholder-user.jpg",
+    position: "CEO & Assistente de Comunicações",
+    bio: "Técnico em Desenvolvimento de Sistemas especialista em comunicação, resolução de problemas e em diversos tipos de conhecimento relacionados a área da tecnologia e da sociedade como um todo.",
+    projects: ["TecLibras"],
+    joinedAt: new Date("2023-01-15"),
+    skills: ["React", "Node.js", "TypeScript", "Angular", "C++"],
+    social: {
+      linkedin: "https://www.linkedin.com/in/miguel-santana-gonçalves-082754350?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    },
+  },
 ]
 
 export function getMemberByUuid(uuid: string): Member | undefined {
