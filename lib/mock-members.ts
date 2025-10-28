@@ -148,7 +148,7 @@ export const mockMembers: Member[] = [
     name: "Miguel Santana Gonçalves",
     email: "miguelsg.toasty@gmail.com",
     phone: "+55 13 991090772",
-    photo: "https://cdn.discordapp.com/attachments/1378494433326268469/1432743799230169169/IMG-20251028-WA0008.jpg?ex=69022a24&is=6900d8a4&hm=90c410fe84ecb095171fc3bb25c6bc2e64c11ae9b3acd2e3842271e7e8ae59f0",
+    photo: "https://cdn.discordapp.com/attachments/1378494433326268469/1432743799230169169/IMG-20251028-WA0008.jpg",
     position: "CEO & Assistente de Comunicações",
     bio: "Técnico em Desenvolvimento de Sistemas especialista em comunicação, resolução de problemas e em diversos tipos de conhecimento relacionados a área da tecnologia e da sociedade como um todo.",
     projects: ["TecLibras"],
