@@ -393,7 +393,7 @@ function LandingPageContent() {
                     "Plataforma completa de vendas online com sistema de pagamento integrado e painel administrativo.",
                   testimonial: "Excelente trabalho! A equipe entregou exatamente o que precisávamos.",
                   image: "/plataforma-marketplace-capa-toastytech-v1.png",
-                  link: "https://marketplace.toastytech.com.br",
+                  link: "https://pitaia.toastytech.com.br/",
                 },
                 {
                   title: "App de gestão financiera",
@@ -401,15 +401,15 @@ function LandingPageContent() {
                   description: "Aplicativo para acompanhar finanças pessoais e empresariais com funcionalidades avançadas e auxilio de IA.",
                   testimonial: "App incrível! Superou nossas expectativas em funcionalidade e design.",
                   image: "/plataforma-finanz-capa-toastytech-v1.png",
-                  link: "https://finanz.toastytech.com.br",
+                  link: "https://finanz.app.br",
                 },
                 {
-                  title: "Sistema ERP Personalizado",
+                  title: "Sistema CRM Personalizado",
                   type: "Sistema",
-                  description: "Sistema completo de gestão empresarial com módulos financeiro, estoque e vendas.",
+                  description: "Sistema completo de gestão de clientes e contatos com recursos avançados e personalizados.",
                   testimonial: "Sistema perfeito para nossa empresa. Aumentou nossa produtividade em 40%.",
                   image: "/plataforma-attendance-capa-toastytech-v1.png",
-                  link: "https://erp.toastytech.com.br",
+                  link: "https://followup.toastytech.com.br",
                 },
                 {
                   title: "Plataforma Educacional",
@@ -452,7 +452,7 @@ function LandingPageContent() {
                   description: "Jogo de preparaçao para vestibular de filosofia",
                   testimonial: "Superou todas as minhas expectativas",
                   image: "/plataforma-filosofo-capa-toastytech-v1.png",
-                  link: "https://filosofo.toastytech.com.br",
+                  link: "https://filosofia.toastytech.com.br",
 
                 }
               ].map((project, index) => (
