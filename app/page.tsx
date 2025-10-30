@@ -18,6 +18,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageSelector } from "@/components/language-selector"
 import { title } from "process"
 import { Description } from "@radix-ui/react-toast"
+import { link } from "fs"
 
 // Animation variants
 const fadeInUp = {
@@ -392,6 +393,7 @@ function LandingPageContent() {
                     "Plataforma completa de vendas online com sistema de pagamento integrado e painel administrativo.",
                   testimonial: "Excelente trabalho! A equipe entregou exatamente o que precisávamos.",
                   image: "/plataforma-marketplace-capa-toastytech-v1.png",
+                  link: "https://marketplace.toastytech.com.br",
                 },
                 {
                   title: "App de gestão financiera",
@@ -399,6 +401,7 @@ function LandingPageContent() {
                   description: "Aplicativo para acompanhar finanças pessoais e empresariais com funcionalidades avançadas e auxilio de IA.",
                   testimonial: "App incrível! Superou nossas expectativas em funcionalidade e design.",
                   image: "/plataforma-finanz-capa-toastytech-v1.png",
+                  link: "https://finanz.toastytech.com.br",
                 },
                 {
                   title: "Sistema ERP Personalizado",
@@ -406,6 +409,7 @@ function LandingPageContent() {
                   description: "Sistema completo de gestão empresarial com módulos financeiro, estoque e vendas.",
                   testimonial: "Sistema perfeito para nossa empresa. Aumentou nossa produtividade em 40%.",
                   image: "/plataforma-attendance-capa-toastytech-v1.png",
+                  link: "https://erp.toastytech.com.br",
                 },
                 {
                   title: "Plataforma Educacional",
@@ -414,6 +418,7 @@ function LandingPageContent() {
                     "Portal de ensino online com videoaulas, exercícios interativos e acompanhamento de progresso.",
                   testimonial: "Transformou nossa forma de ensinar. Alunos mais engajados e resultados melhores.",
                   image: "/plataforma-minerva-capa-toastytech-v1.png",
+                  link: "https://minerva.toastytech.com.br",
                 },
                 {
                   title: "SAAS de geração de blogs",
@@ -422,6 +427,7 @@ function LandingPageContent() {
                     "Plataforma de geração de blogs com editor de texto e recursos de gestão de conteúdo.",
                   testimonial: "Excelente trabalho! A equipe entregou exatamente o que precisávamos.",
                   image: "/plataforma-myownblog-capa-toastytech-v1.png",
+                  link: "https://myownblog.toastytech.com.br",
                 },
                 {
                   title: "Plataforma para ensino de Libras",
@@ -430,20 +436,23 @@ function LandingPageContent() {
                     "Plataforma de ensino de Libras com gamificacao, exercícios praticos interativos e acompanhamento de progresso.",
                   testimonial: "Excelente trabalho! A equipe entregou exatamente o que precisávamos.",
                   image: "/plataforma-teclibras-capa-toastytech-v1.png",
+                  link: "https://teclibras.toastytech.com.br",
                 },
                 {
                   title: "Jogo educativo de biologia",
                   type: "web",
                   description: "Jogo online para promover o conhecimento da fauna",
                   testimonial: "A velocidade da entrega me surpreendeu!",
-                  image: "/plataforma-animaldle-capa-toastytech-v1.png"
+                  image: "/plataforma-animaldle-capa-toastytech-v1.png",
+                  link: "https://animaldle.toastytech.com.br",
                 },
                 {
                   title: "Philosopher guess",
                   type: "Mobile",
                   description: "Jogo de preparaçao para vestibular de filosofia",
                   testimonial: "Superou todas as minhas expectativas",
-                  image: "/plataforma-filosofo-capa-toastytech-v1.png"
+                  image: "/plataforma-filosofo-capa-toastytech-v1.png",
+                  link: "https://filosofo.toastytech.com.br",
 
                 }
               ].map((project, index) => (
@@ -453,6 +462,7 @@ function LandingPageContent() {
                   whileHover={{ scale: 1.02, rotateY: 5 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
+                  <Link href={project.link} target="_blank">
                   <Card className="border-purple-200 dark:border-purple-800 hover:shadow-lg dark:hover:shadow-purple-500/25 transition-all duration-300 bg-white dark:bg-gray-800 overflow-hidden">
                     <CardHeader className="p-0">
                       <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
@@ -491,6 +501,7 @@ function LandingPageContent() {
                       <p className="text-sm text-gray-600 dark:text-gray-400 italic">"{project.testimonial}"</p>
                     </CardContent>
                   </Card>
+                  </Link>
                 </motion.div>
               ))}
             </AnimatedSection>
