@@ -392,7 +392,7 @@ function LandingPageContent() {
                   description:
                     "Plataforma completa de vendas online com sistema de pagamento integrado e painel administrativo.",
                   testimonial: "Excelente trabalho! A equipe entregou exatamente o que precisávamos.",
-                  image: "/plataforma-marketplace-capa-toastytech-v1.png",
+                  image: "/SAVE_20251030_214139.jpg",
                   link: "https://pitaia.toastytech.com.br/",
                 },
                 {
